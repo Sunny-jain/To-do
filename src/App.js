@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import Form from './components/Form'
+import Tasks from './components/Tasks'
 import Todolist from './components/Todolist';
+import Day from "./components/DayComponenet";
 
 function App() {
-
-  const [input, setInput] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = new useState([]);
 
   useEffect(() => {
     getLocalTodos();
@@ -31,19 +30,32 @@ function App() {
   }
 
   return (    
-    <div className = "todo-app">
-      <h1>To-Do List</h1>
-      <Form 
-        placeholder = "Enter the tasks"
-        setInput = {setInput}
-        input = {input}
-        todos = {todos}
-        setTodos = {setTodos}
-      />
-      <Todolist 
-        todos = {todos}
-        setTodos = {setTodos}
-      />
+    <div id = "body">
+      <div className = "row">
+        <div className = "col-1 col-md-3"></div>
+        <div className = "card mx-auto col-10 col-md-6">
+          <div className = "card-body">
+            <div className = "card-title row">
+                <div className = "col-9 col-md-10">
+                  <Day/>
+                </div>
+                <div className = "col-3 col-md-2">
+                  <Tasks
+                    todos = {todos}
+                    setTodos = {setTodos}
+                  />
+                </div>
+            </div>
+            <hr></hr>
+          </div>
+          <Todolist 
+            todos = {todos}
+            setTodos = {setTodos}
+          />
+          <hr></hr>
+        </div>
+        <div className = "col-1 col-md-3"></div>
+      </div>
     </div>
   );
 }
