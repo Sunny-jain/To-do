@@ -3,9 +3,11 @@ import './App.css';
 import Tasks from './components/Tasks'
 import Todolist from './components/Todolist';
 import Day from "./components/DayComponenet";
+import Switch from "./components/Switch";
 
 function App() {
   const [todos, setTodos] = new useState([]);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
     getLocalTodos();
@@ -30,10 +32,17 @@ function App() {
   }
 
   return (    
-    <div id = "body">
+    <div id = "body" className = {dark ? 'dark':'light'} >
+      <div className = "main">
+        <span className = "text-toggle">{dark ? "dark" : "light"} </span>
+        <Switch
+          dark = {dark}
+          setDark = {setDark}
+        />
+      </div>
       <div className = "row">
         <div className = "col-1 col-md-3"></div>
-        <div className = "card mx-auto col-10 col-md-6">
+        <div className = {`card mx-auto col-10 col-md-6 ${dark ? 'dark-card' : 'light-card'}`}>
           <div className = "card-body">
             <div className = "card-title row">
                 <div className = "col-9 col-md-10">
